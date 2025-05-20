@@ -1,31 +1,108 @@
-# Space X First Stage Landing Prediction
+# 🚀 SpaceX Launch Data Analysis with Python
 
-April 17, 2024
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![API](https://img.shields.io/badge/Data-REST_API-yellowgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-This document contains code to retrieve data from the SpaceX API and perform some analysis on the first stage landing success of SpaceX rockets.
+> A Python-powered data pipeline that fetches, processes, and analyzes historical launch data from SpaceX using its public REST API. This project focuses on extracting technical and operational launch parameters for further study and visualization.
 
-## Data Retrieval
+---
 
-The code uses the `requests` library to make HTTP requests to the SpaceX API and retrieve data about rocket launches, payloads, cores, and other related information.
+## 📊 Overview
 
-### Functions
+This notebook retrieves detailed SpaceX launch data and decodes key mission elements such as:
 
-1. `getBoosterVersion(data)`: Takes a dataset and uses the `rocket` column to call the API and append the booster version name to a list.
+- 🚀 Rocket names and versions
+- 📍 Launch site coordinates and names
+- 🛰️ Payload mass and orbit type
+- 🧱 Rocket core reuse metrics and outcomes
+- 📈 Mission success and failure metadata
 
-2. `getLaunchSite(data)`: Takes a dataset and uses the `launchpad` column to call the API and append the launch site longitude, latitude, and name to respective lists.
+The project leverages SpaceX's v4 API to enrich datasets using HTTP requests and builds structured data tables for further use in machine learning, dashboards, or statistical analysis.
 
-3. `getPayloadData(data)`: Takes a dataset and uses the `payloads` column to call the API and append the payload mass and orbit to respective lists.
+---
 
-4. `getCoreData(data)`: Takes a dataset and uses the `cores` column to call the API and append various core data (block, reused count, serial number, outcome, flights, grid fins, reused status, legs, and landing pad) to respective lists.
+## 📁 Features
 
-## Usage
+- 🔌 **Live API Integration** using `requests`
+- 📦 **Data Enrichment**: joins launch data with rocket, payload, and core information
+- 📍 **Geo-location**: extracts and maps launch site coordinates
+- 🛰️ **Payload Details**: mass, orbit, and classification
+- 🔁 **Reusability Metrics**: flight count, reuse status, landing success
 
-1. Import the necessary libraries (`requests`, `pandas`, `numpy`, `datetime`).
-2. Set display options for pandas DataFrame using `pd.set_option`.
-3. Define the helper functions mentioned above.
-4. Retrieve the launch data from the SpaceX API.
-5. Process the data as needed using the helper functions.
+---
 
-## Note
+## 🧪 Data Sources & Structure
 
-This code assumes that you have an active internet connection and the SpaceX API is accessible. It also assumes that the API endpoints and response structure remain consistent with the code.
+- **API Endpoint**: `https://api.spacexdata.com/v4/launches/past`
+- **Additional Endpoints Queried**:
+  - `/rockets`
+  - `/launchpads`
+  - `/payloads`
+  - `/cores`
+
+### Example Structure:
+
+```python
+spacex_url = "https://api.spacexdata.com/v4/launches/past"
+response = requests.get(spacex_url)
+launch_data = response.json()
+```
+
+---
+
+## 🧠 Data Enrichment Functions
+
+The dataset is enriched using the following helper functions:
+
+- `getBoosterVersion(data)`
+- `getLaunchSite(data)`
+- `getPayloadData(data)`
+- `getCoreData(data)`
+
+Each function performs an API lookup and appends new fields to the dataset, such as:
+
+- 🚀 Booster name
+- 📍 Launch site longitude and latitude
+- 🛰️ Payload mass and orbit
+- 🔁 Reuse count and landing success
+
+---
+
+## 🛠 Libraries Used
+
+- `requests` – for HTTP API calls  
+- `pandas` – for data manipulation  
+- `numpy` – for numerical operations  
+- `datetime` – to format launch dates  
+- `json` – to handle API responses
+
+---
+
+## 🧠 Future Scope
+
+- 🌐 Integrate visualization (e.g. launch maps with Folium or Plotly)  
+- 📈 Create time series plots of mission frequency, reuse trends, or payload mass  
+- 🧮 Feed data into ML models for mission success prediction  
+- 🌍 Add a world map with launch sites and trajectories
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.  
+Feel free to use, modify, and distribute it with proper attribution.
+
+---
+
+## 🙌 Acknowledgments
+
+- [SpaceX API](https://github.com/r-spacex/SpaceX-API) – for access to public space launch data  
+- Python open-source community – for the tools and libraries used
+
+---
+
+## 📫 Contact
+
+For feedback, contributions, or questions:  
+📧 **akhilsai96@gmail.com**
